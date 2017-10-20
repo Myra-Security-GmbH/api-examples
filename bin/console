@@ -10,5 +10,7 @@ $app->addCommands([
     new \Myracloud\API\Command\CacheClearCommand(),
     new \Myracloud\API\Command\ErrorPagesCommand(),
     new \Myracloud\API\Command\MaintenanceCommand(),
+    new \Myracloud\API\Command\DnsRecordCommand(),
+    new \Myracloud\API\Command\ZoneImportCommand(),
 ]);
 $app->run();

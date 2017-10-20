@@ -15,6 +15,7 @@
     "minimum-stability": "stable",
     "require"          : {
         "symfony/console": "^3.0",
-        "symfony/options-resolver": "^3.0"
+        "symfony/options-resolver": "^3.0",
+        "ltd-beget/dns-zone-configurator": "^1.1"
     }
 }
