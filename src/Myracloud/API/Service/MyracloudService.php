@@ -277,7 +277,7 @@ class MyracloudService
             case 200:
                 $data = json_decode($ret, true);
 
-                if ($data['error']) {
+                if (isset($data['error'])) {
                     throw new ApiCallException('There was an error in the last api call.', $data);
                 }
 
