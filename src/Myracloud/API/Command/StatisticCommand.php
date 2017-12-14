@@ -24,16 +24,16 @@ class StatisticCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('myracloud:api:statistic');
-        $this->addArgument('apiKey', InputArgument::REQUIRED, 'Api key to authenticate against Myracloud API.', null);
-        $this->addArgument('secret', InputArgument::REQUIRED, 'Secret to authenticate against Myracloud API.', null);
+        $this->addArgument('apiKey', InputArgument::REQUIRED, 'Api key to authenticate against Myra API.', null);
+        $this->addArgument('secret', InputArgument::REQUIRED, 'Secret to authenticate against Myra API.', null);
         $this->addArgument('fqdn', InputArgument::REQUIRED, 'Domain that should be used to clear the cache.'); 
 
-        $this->addOption('startDate', 's', InputOption::VALUE_REQUIRED, 'startDate Time.', date('Y-m-d H:i:s', strtotime("yesterday")));
-        $this->addOption('endDate', 'e', InputOption::VALUE_REQUIRED, 'endDate Time.', date('Y-m-d H:i:s', strtotime("now")));
+        $this->addOption('startDate', 's', InputOption::VALUE_REQUIRED, 'startDate Time.', date('Y-m-d H:i:s', strtotime('today')));
+        $this->addOption('endDate', 'e', InputOption::VALUE_REQUIRED, 'endDate Time.', date('Y-m-d H:i:s', strtotime('now')));
 
         $this->setHelp(<<<EOF
 <fg=yellow>Example usage:</>
-bin/console myracloud:api:statistic -s '2017-12-13 00:00:00' -e '2017-12-13 12:00:59' <apiKey> <secret> <fqdn> -v
+bin/console myracloud:api:statistic -s '2017-12-14 00:00:00' -e '2017-12-13 23:59:59' <apiKey> <secret> <fqdn> -v
 EOF
       );
 
@@ -89,7 +89,7 @@ EOF
                 'type'                => 'fqdn',
                 'fqdn'                => array('ALL:'.$this->options['fqdn']),
                 'aggregationInterval' => 'hour',
-                'dataSources'         => $this->getKPIDataSources()
+                'dataSources'         => $this->getKpiDataSources(),
             )
         );
 
@@ -131,7 +131,7 @@ EOF
         }
     }
 
-    protected function getKPIDataSources()
+    protected function getKpiDataSources()
     {
         return array(
             'requests_stats' => array(

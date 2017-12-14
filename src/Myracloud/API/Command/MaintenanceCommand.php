@@ -29,8 +29,8 @@ class MaintenanceCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('myracloud:api:maintenance');
-        $this->addArgument('apiKey', InputArgument::REQUIRED, 'Api key to authenticate against Myracloud API.', null);
-        $this->addArgument('secret', InputArgument::REQUIRED, 'Secret to authenticate against Myracloud API.', null);
+        $this->addArgument('apiKey', InputArgument::REQUIRED, 'Api key to authenticate against Myra API.', null);
+        $this->addArgument('secret', InputArgument::REQUIRED, 'Secret to authenticate against Myra API.', null);
         $this->addArgument('fqdn', InputArgument::REQUIRED, 'Domain that should be used to clear the cache.');
 
         $this->addOption('operation', 'o', InputOption::VALUE_REQUIRED, '', self::OPERATION_CREATE);

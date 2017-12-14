@@ -23,14 +23,14 @@ class CacheClearCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('myracloud:api:cacheClear');
-        $this->addArgument('apiKey', InputArgument::REQUIRED, 'Api key to authenticate against Myracloud API.', null);
-        $this->addArgument('secret', InputArgument::REQUIRED, 'Secret to authenticate against Myracloud API.', null);
+        $this->addArgument('apiKey', InputArgument::REQUIRED, 'Api key to authenticate against Myra API.', null);
+        $this->addArgument('secret', InputArgument::REQUIRED, 'Secret to authenticate against Myra API.', null);
         $this->addArgument('fqdn', InputArgument::REQUIRED, 'Domain that should be used to clear the cache.');
 
         $this->addOption('cleanupRule', null, InputOption::VALUE_REQUIRED, 'Rule that describes which files should be removed from the cache.', null);
         $this->addOption('recursive', 'r', InputOption::VALUE_NONE, 'Should the rule applied recursively.');
 
-        $this->setDescription('CacheClear commands allows you to do a cache clear via Myracloud API.');
+        $this->setDescription('CacheClear commands allows you to do a cache clear via Myra API.');
 
         parent::configure();
     }
