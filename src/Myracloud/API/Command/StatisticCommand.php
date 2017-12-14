@@ -104,7 +104,7 @@ EOF
 
             $table->setHeaders([
                 'Domain',
-                'Total Requests', 'Requests Cached', 'Requests Uncached', 
+                'Total Requests', 'Cached Requests', 'Uncached Requests', 
                 'Total Traffic', 'Total abgewehrt',
                 'Ø Antwortzeit Upstream', '200', '301', '302', '304', '403', '404', '500', 'Other',
             ]); 
