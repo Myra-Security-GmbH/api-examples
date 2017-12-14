@@ -174,6 +174,55 @@ class MyracloudService
     }
 
     /**
+     * Handles DNS Records operations.
+     *
+     * @param string $method
+     * @param string $fqdn
+     * @param array  $data
+     * @return mixed
+     * @throws ApiCallException
+     */
+    public function dnsRecord($method, $fqdn, array $data = [])
+    {
+        try {
+            return $this->request([
+                'method'  => $method,
+                'url'     => 'dnsRecords/' . trim($fqdn, '.'),
+                'content' => (!empty($data) ? json_encode($data) : ''),
+            ]);
+        } catch (ApiCallException $ex) {
+            if (!$this->output) {
+                throw $ex;
+            }
+
+            $this->outputViolations($ex->getData());
+        }
+
+        return null;
+    }
+
+    public function statistic($method, array $data = [])
+    {
+
+        try {
+            return $this->request([
+                'method'  => $method,
+                'url'     => 'statistic/query',
+                'content' => (!empty($data) ? json_encode($data) : ''),
+            ]);
+        } catch (ApiCallException $ex) {
+            if (!$this->output) {
+                throw $ex;
+            }
+
+            $this->outputViolations($ex->getData());
+        }
+
+        return null;
+    }
+
+
+    /**
      * Calls the given command
      *
      * @param array $options
@@ -228,7 +277,7 @@ class MyracloudService
             case 200:
                 $data = json_decode($ret, true);
 
-                if ($data['error']) {
+                if (isset($data['error'])) {
                     throw new ApiCallException('There was an error in the last api call.', $data);
                 }
 
