@@ -100,39 +100,34 @@ EOF
         }
 
         if ($ret) {
-
             $table = new Table($output);
 
             $table->setHeaders([
                 'Domain',
-                'Total Requests (Cached/Uncached)', 
-                'Total Traffic', 'Total abgewehrt', 
-                'Ø Antwortzeit Upstream', 'Statuscode 200', '301', '302', '304', '403', '404', '500', 'Other',
+                'Total Requests', 'Requests Cached', 'Requests Uncached', 
+                'Total Traffic', 'Total abgewehrt',
+                'Ø Antwortzeit Upstream', '200', '301', '302', '304', '403', '404', '500', 'Other',
             ]); 
-   
+
             $table->addRow([
                 $this->options['fqdn'],
-                number_format($ret['result']['requests_stats']['sum'], 0, ',', '.')
-                    . ' (' 
-                    . number_format($ret['result']['requests_cached_stats']['sum'], 0, ',', '.') 
-                    . '/'
-                    . number_format($ret['result']['requests_uncached_stats']['sum'], 0, ',', '.') 
-                    . ')' ,
-                round($ret['result']['bytes_stats']['sum'] / 1024 / 1024 / 1024 ) . ' GB',
+                $ret['result']['requests_stats']['sum'],
+                $ret['result']['requests_cached_stats']['sum'],
+                $ret['result']['requests_uncached_stats']['sum'],
+                $ret['result']['bytes_stats']['sum'],  
                 $ret['result']['requests_blocked_stats']['sum'],
                 floor($ret['result']['upstream_performance_stats']['avg'] * 1000) . ' ms',
-                number_format($ret['result']['response_codes_stats']['200']['sum'], 0, ',', '.'),
-                number_format($ret['result']['response_codes_stats']['301']['sum'], 0, ',', '.'),
-                number_format($ret['result']['response_codes_stats']['302']['sum'], 0, ',', '.'),
-                number_format($ret['result']['response_codes_stats']['304']['sum'], 0, ',', '.'),
-                number_format($ret['result']['response_codes_stats']['403']['sum'], 0, ',', '.'),
-                number_format($ret['result']['response_codes_stats']['404']['sum'], 0, ',', '.'),
-                number_format($ret['result']['response_codes_stats']['500']['sum'], 0, ',', '.'),
-                number_format($ret['result']['response_codes_stats']['Other']['sum'], 0, ',', '.'),
+                $ret['result']['response_codes_stats']['200']['sum'],
+                $ret['result']['response_codes_stats']['301']['sum'],
+                $ret['result']['response_codes_stats']['302']['sum'],
+                $ret['result']['response_codes_stats']['304']['sum'],
+                $ret['result']['response_codes_stats']['403']['sum'],
+                $ret['result']['response_codes_stats']['404']['sum'],
+                $ret['result']['response_codes_stats']['500']['sum'],
+                $ret['result']['response_codes_stats']['Other']['sum'],
             ]);
 
-            $table->render();
-        
+            $table->render();        
         }
     }
 
